@@ -1,3 +1,4 @@
+# cmake version
 if(MSVC)
   cmake_minimum_required(VERSION 3.8)
 elseif(USE_GPU OR APPLE)
@@ -6,12 +7,14 @@ else()
   cmake_minimum_required(VERSION 2.8)
 endif()
 
+# project name 
 PROJECT(lightgbm)
 
 OPTION(USE_MPI "MPI based parallel learning" OFF)
 OPTION(USE_OPENMP "Enable OpenMP" ON)
 OPTION(USE_GPU "Enable GPU-acclerated training (EXPERIMENTAL)" OFF)
 
+# GNU compiler version
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.2")
     message(FATAL_ERROR "Insufficient gcc version")
@@ -87,7 +90,7 @@ if(MSVC)
     )
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /O2 /Ob2 /Oi /Ot /Oy /GL")
 else()
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -fPIC")
 endif()
 
 
